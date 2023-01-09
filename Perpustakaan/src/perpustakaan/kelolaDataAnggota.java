@@ -254,7 +254,7 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
 
     private void cariBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBtnActionPerformed
         // TODO add your handling code here:
-        String idAnggota=idAnggota.getText().toString();
+        String IDAnggota=idAnggota.getText().toString();
         String namaDepan=namaDepanAnggota.getText().toString();
         String namaBelakang=namaBelakangAnggota.getText().toString();
         String email=emailAnggota.getText().toString();
