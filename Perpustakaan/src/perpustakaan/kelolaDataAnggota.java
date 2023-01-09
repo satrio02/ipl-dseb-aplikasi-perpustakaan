@@ -125,6 +125,7 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
         jLabel1.setText("Welcome to Siperpus !");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -132,16 +133,16 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addContainerGap(614, Short.MAX_VALUE))
+                .addContainerGap(619, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         idAnggota.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
