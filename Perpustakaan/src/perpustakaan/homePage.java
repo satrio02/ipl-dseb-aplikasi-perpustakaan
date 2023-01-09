@@ -27,7 +27,7 @@ public class homePage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        homeTitle = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,10 +40,15 @@ public class homePage extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
-        jLabel1.setText("Welcome to Siperpus !");
+        homeTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        homeTitle.setForeground(new java.awt.Color(255, 255, 255));
+        homeTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
+        homeTitle.setText("Welcome to Siperpus !");
+        homeTitle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeTitleMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -51,14 +56,14 @@ public class homePage extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(homeTitle)
                 .addContainerGap(585, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addComponent(homeTitle)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -84,22 +89,32 @@ public class homePage extends javax.swing.JFrame {
         addBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/book.png"))); // NOI18N
         addBook.setText("Tambah Buku");
         addBook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBookMouseClicked(evt);
+            }
+        });
 
         addUser.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         addUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
         addUser.setText("Tambah Pengguna");
         addUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addUserMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addGap(124, 124, 124)
                 .addComponent(addBook)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addComponent(addUser)
-                .addGap(92, 92, 92))
+                .addGap(110, 110, 110))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +146,30 @@ public class homePage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBookMouseClicked
+        // TODO add your handling code here:
+        kelolaDataAnggota addAnggotaPage = new kelolaDataAnggota();
+        addAnggotaPage.show();
+        
+        dispose();
+    }//GEN-LAST:event_addBookMouseClicked
+
+    private void addUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserMouseClicked
+        // TODO add your handling code here:
+        userInterface addUserPage = new userInterface();
+        addUserPage.show();
+        
+        dispose();
+    }//GEN-LAST:event_addUserMouseClicked
+
+    private void homeTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeTitleMouseClicked
+        // TODO add your handling code here:
+        homePage gotoHomepage = new homePage();
+        gotoHomepage.show();
+        
+        dispose();
+    }//GEN-LAST:event_homeTitleMouseClicked
 
     /**
      * @param args the command line arguments
@@ -170,7 +209,7 @@ public class homePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addBook;
     private javax.swing.JLabel addUser;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel homeTitle;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

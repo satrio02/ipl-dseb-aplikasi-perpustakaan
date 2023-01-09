@@ -42,7 +42,7 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
         tahunRegister = new javax.swing.JTextField();
         deleteBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        homeTitle = new javax.swing.JLabel();
         idAnggota = new javax.swing.JTextField();
         namaDepanAnggota = new javax.swing.JTextField();
         namaBelakangAnggota = new javax.swing.JTextField();
@@ -123,10 +123,15 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
-        jLabel1.setText("Welcome to Siperpus !");
+        homeTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        homeTitle.setForeground(new java.awt.Color(255, 255, 255));
+        homeTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
+        homeTitle.setText("Welcome to Siperpus !");
+        homeTitle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeTitleMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,14 +139,14 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(homeTitle)
                 .addContainerGap(619, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addComponent(homeTitle)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -305,6 +310,14 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tahunRegisterActionPerformed
 
+    private void homeTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeTitleMouseClicked
+        // TODO add your handling code here:
+        homePage gotoHomepage = new homePage();
+        gotoHomepage.show();
+        
+        dispose();
+    }//GEN-LAST:event_homeTitleMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -345,8 +358,8 @@ public class kelolaDataAnggota extends javax.swing.JFrame {
     private javax.swing.JButton clearBtn;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField emailAnggota;
+    private javax.swing.JLabel homeTitle;
     private javax.swing.JTextField idAnggota;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

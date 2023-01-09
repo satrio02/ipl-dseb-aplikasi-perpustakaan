@@ -30,7 +30,7 @@ public class userInterface extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        homeTitle = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -57,10 +57,15 @@ public class userInterface extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
-        jLabel1.setText("Welcome to Siperpus !");
+        homeTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        homeTitle.setForeground(new java.awt.Color(255, 255, 255));
+        homeTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
+        homeTitle.setText("Welcome to Siperpus !");
+        homeTitle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeTitleMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,14 +73,14 @@ public class userInterface extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(homeTitle)
                 .addContainerGap(619, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addComponent(homeTitle)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -177,11 +182,14 @@ public class userInterface extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(100, 100, 100)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(submitBtn)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(submitBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(62, 62, 62))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(120, 120, 120)
@@ -298,6 +306,14 @@ public class userInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void homeTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeTitleMouseClicked
+        // TODO add your handling code here:
+        homePage gotoHomepage = new homePage();
+        gotoHomepage.show();
+        
+        dispose();
+    }//GEN-LAST:event_homeTitleMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -337,8 +353,8 @@ public class userInterface extends javax.swing.JFrame {
     private javax.swing.JTextField PenerbitBuku;
     private javax.swing.JButton clearBtn;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JLabel homeTitle;
     private javax.swing.JTextField isbnBuku;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
