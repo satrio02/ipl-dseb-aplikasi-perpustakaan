@@ -39,6 +39,7 @@ public class homePage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         homeTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         homeTitle.setForeground(new java.awt.Color(255, 255, 255));

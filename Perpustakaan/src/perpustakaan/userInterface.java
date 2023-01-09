@@ -61,6 +61,7 @@ public class userInterface extends javax.swing.JFrame {
         homeTitle.setForeground(new java.awt.Color(255, 255, 255));
         homeTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/onlinelib.png"))); // NOI18N
         homeTitle.setText("Welcome to Siperpus !");
+        homeTitle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         homeTitle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 homeTitleMouseClicked(evt);
