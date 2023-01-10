@@ -64,6 +64,11 @@ public class login extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 80, 30));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -97,6 +102,19 @@ public class login extends javax.swing.JFrame {
         
         dispose();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String Email=email.getText().toString();
+        String Password=pass.getText().toString();
+        
+        if(Email.equals("")){
+            JOptionPane.showMessageDialog(null, "Email Wajib Diisi");
+        }
+        if(Password.equals("")){
+            JOptionPane.showMessageDialog(null, "Password Wajib Diisi");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

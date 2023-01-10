@@ -5,6 +5,7 @@
 package perpustakaan;
 
 import javax.swing.JOptionPane;
+import java.util.regex.*;
 
 /**
  *
@@ -39,10 +40,15 @@ public class Register extends javax.swing.JFrame {
         namabelakang = new javax.swing.JTextField();
         notelp = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        password = new javax.swing.JPasswordField();
+        PWlab = new javax.swing.JLabel();
+        NDlab = new javax.swing.JLabel();
+        NBlab = new javax.swing.JLabel();
+        NTlab = new javax.swing.JLabel();
+        Elab = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,7 +65,7 @@ public class Register extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(318, Short.MAX_VALUE)
+                .addContainerGap(321, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(314, 314, 314))
         );
@@ -94,16 +100,43 @@ public class Register extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 80, 20));
 
         namadepan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        namadepan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                namadepanKeyReleased(evt);
+            }
+        });
         getContentPane().add(namadepan, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 330, 30));
 
         namabelakang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        namabelakang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                namabelakangKeyReleased(evt);
+            }
+        });
         getContentPane().add(namabelakang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 330, 30));
 
         notelp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        notelp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                notelpKeyReleased(evt);
+            }
+        });
         getContentPane().add(notelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 330, 30));
 
         email.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                emailKeyReleased(evt);
+            }
+        });
         getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 330, 30));
+
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                passwordKeyReleased(evt);
+            }
+        });
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 302, 330, 30));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Submit");
@@ -131,20 +164,39 @@ public class Register extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, -1, 30));
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 302, 330, 30));
+
+        PWlab.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        PWlab.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(PWlab, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 110, 30));
+
+        NDlab.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        NDlab.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(NDlab, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 110, 30));
+
+        NBlab.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        NBlab.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(NBlab, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 110, 30));
+
+        NTlab.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        NTlab.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(NTlab, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 110, 30));
+
+        Elab.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        Elab.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(Elab, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 110, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
+            .addGap(0, 840, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 820, 370));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 840, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -171,7 +223,9 @@ public class Register extends javax.swing.JFrame {
         if(Password.equals("")){
             JOptionPane.showMessageDialog(null, "Password Wajib Diisi");
         }
-        JOptionPane.showMessageDialog(null, "Registrasi Berhasil");
+        else{
+            JOptionPane.showMessageDialog(null, "Registrasi Berhasil");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -190,6 +244,77 @@ public class Register extends javax.swing.JFrame {
         
         dispose();
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void namadepanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namadepanKeyReleased
+        // TODO add your handling code here:
+        String PATTERN = "^[A-Za-z]{0,30}$";
+        Pattern patt=Pattern.compile(PATTERN);
+        Matcher match=patt.matcher(namadepan.getText());
+        
+        if(!match.matches()){
+            NDlab.setText("Format Nama Salah!");
+        }
+        else{
+            NDlab.setText(null);
+        }
+    }//GEN-LAST:event_namadepanKeyReleased
+
+    private void namabelakangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namabelakangKeyReleased
+        // TODO add your handling code here:
+        String PATTERN = "^[A-Za-z]{0,30}$";
+        Pattern patt=Pattern.compile(PATTERN);
+        Matcher match=patt.matcher(namabelakang.getText());
+        
+        if(!match.matches()){
+            NBlab.setText("Format Nama Salah!");
+        }
+        else{
+            NBlab.setText(null);
+        }
+    }//GEN-LAST:event_namabelakangKeyReleased
+
+    private void notelpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notelpKeyReleased
+        // TODO add your handling code here:
+        String PATTERN = "^[0-9]{0,12}$";
+        Pattern patt=Pattern.compile(PATTERN);
+        Matcher match=patt.matcher(notelp.getText());
+        
+        if(!match.matches()){
+            NTlab.setText("Hanya Diisi Angka!");
+        }
+        else{
+            NTlab.setText(null);
+        }
+    }//GEN-LAST:event_notelpKeyReleased
+
+    private void emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyReleased
+        // TODO add your handling code here:
+        //contoh format email@gmail.com
+        String PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        Pattern patt=Pattern.compile(PATTERN);
+        Matcher match=patt.matcher(email.getText());
+        
+        if(!match.matches()){
+            Elab.setText("Format Email Salah!");
+        }
+        else{
+            Elab.setText(null);
+        }
+    }//GEN-LAST:event_emailKeyReleased
+
+    private void passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyReleased
+        // TODO add your handling code here:
+        String PATTERN = "^[A-Za-z0-9+-.]{0,12}$";
+        Pattern patt=Pattern.compile(PATTERN);
+        Matcher match=patt.matcher(password.getText());
+        
+        if(!match.matches()){
+            PWlab.setText("Format Salah!");
+        }
+        else{
+            PWlab.setText(null);
+        }
+    }//GEN-LAST:event_passwordKeyReleased
 
     /**
      * @param args the command line arguments
@@ -227,6 +352,11 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Elab;
+    private javax.swing.JLabel NBlab;
+    private javax.swing.JLabel NDlab;
+    private javax.swing.JLabel NTlab;
+    private javax.swing.JLabel PWlab;
     private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
