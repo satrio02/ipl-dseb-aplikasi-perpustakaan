@@ -4,13 +4,23 @@
  */
 package perpustakaan;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author kelompok 10
  */
 public class userInterface extends javax.swing.JFrame {
+    Connection con;
+    Statement st;
+    ResultSet rs;
 
     /**
      * Creates new form userInterface
@@ -45,9 +55,11 @@ public class userInterface extends javax.swing.JFrame {
         submitBtn = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelBuku = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         deleteBtn = new javax.swing.JButton();
+        isbnAlert = new javax.swing.JLabel();
+        yearAlert = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,6 +117,11 @@ public class userInterface extends javax.swing.JFrame {
         jLabel8.setText("Nomor ISBN");
 
         tahunTerbitBuku.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tahunTerbitBuku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tahunTerbitBukuKeyReleased(evt);
+            }
+        });
 
         judulBuku.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
@@ -123,6 +140,11 @@ public class userInterface extends javax.swing.JFrame {
         });
 
         isbnBuku.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        isbnBuku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                isbnBukuKeyReleased(evt);
+            }
+        });
 
         submitBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         submitBtn.setText("Submit");
@@ -140,7 +162,7 @@ public class userInterface extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -156,7 +178,7 @@ public class userInterface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelBuku);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Rekap Data");
@@ -168,6 +190,12 @@ public class userInterface extends javax.swing.JFrame {
                 deleteBtnActionPerformed(evt);
             }
         });
+
+        isbnAlert.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        isbnAlert.setForeground(new java.awt.Color(255, 0, 0));
+
+        yearAlert.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        yearAlert.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,40 +209,44 @@ public class userInterface extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(submitBtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(submitBtn)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(62, 62, 62))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120)
-                        .addComponent(judulBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110)
-                        .addComponent(PenerbitBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(140, 140, 140)
-                        .addComponent(penulisBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(128, 128, 128)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(isbnBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tahunTerbitBuku, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(deleteBtn)
-                                .addGap(54, 54, 54)
-                                .addComponent(clearBtn))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(120, 120, 120)
+                                .addComponent(judulBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(110, 110, 110)
+                                .addComponent(PenerbitBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(140, 140, 140)
+                                .addComponent(penulisBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(128, 128, 128)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(isbnBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tahunTerbitBuku, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(deleteBtn)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(clearBtn)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(isbnAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(yearAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,11 +271,13 @@ public class userInterface extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(isbnBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(isbnBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(isbnAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(tahunTerbitBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tahunTerbitBuku, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearAlert, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,29 +295,24 @@ public class userInterface extends javax.swing.JFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-        String judul=judulBuku.getText().toString();
-        String penerbit=PenerbitBuku.getText().toString();
-        String penulis=penulisBuku.getText().toString();
-        String noIsbn=isbnBuku.getText().toString();
-        String thnTerbit=tahunTerbitBuku.getText().toString();
+         try{
+            con = Config.configDB();
+            String sql = "INSERT INTO buku (Judul_Buku, Penerbit, Penulis, No_ISBN, ThnTerbit) VALUES('"+judulBuku.getText()+"','"+PenerbitBuku.getText()+"','"+penulisBuku.getText()+"','"+isbnBuku.getText()+"','"+tahunTerbitBuku.getText()+"')";
+            st = con.createStatement();
+            st.execute(sql);
+            JOptionPane.showMessageDialog(null, "Your book is now available!");
+            
+            DefaultTableModel myTabel = (DefaultTableModel) tabelBuku.getModel();
+            myTabel.addRow(new Object[]{judulBuku.getText(), PenerbitBuku.getText(), penulisBuku.getText(), isbnBuku.getText(), tahunTerbitBuku.getText()});
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
         
-        if(judul.equals("")){
-            JOptionPane.showMessageDialog(null, "Nama Depan Wajib Diisi");
-        }
-        if(penerbit.equals("")){
-            JOptionPane.showMessageDialog(null, "Nama Belakang Wajib Diisi");
-        }
-        if(penulis.equals("")){
-            JOptionPane.showMessageDialog(null, "Nomor Telpon Wajib Diisi");
-        }
-        if(noIsbn.equals("")){
-            JOptionPane.showMessageDialog(null, "Email Wajib Diisi");
-        }
-        if(thnTerbit.equals("")){
-            JOptionPane.showMessageDialog(null, "Password Wajib Diisi");
-        } else {
-            JOptionPane.showMessageDialog(null, "Registrasi Berhasil");
-        }
+        judulBuku.setText(null);
+        PenerbitBuku.setText(null);
+        penulisBuku.setText(null);
+        isbnBuku.setText(null);
+        tahunTerbitBuku.setText(null);
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
@@ -315,6 +344,34 @@ public class userInterface extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_homeTitleMouseClicked
 
+    private void isbnBukuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_isbnBukuKeyReleased
+        // TODO add your handling code here:
+        String PATTERN = "^[0-9]{0,12}$";
+        Pattern patt=Pattern.compile(PATTERN);
+        Matcher match=patt.matcher(isbnBuku.getText());
+        
+        if(!match.matches()){
+            isbnAlert.setText("Hanya Diisi Angka!");
+        }
+        else{
+            isbnAlert.setText(null);
+        }
+    }//GEN-LAST:event_isbnBukuKeyReleased
+
+    private void tahunTerbitBukuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tahunTerbitBukuKeyReleased
+        // TODO add your handling code here:
+        String PATTERN = "^[0-9]{0,12}$";
+        Pattern patt=Pattern.compile(PATTERN);
+        Matcher match=patt.matcher(tahunTerbitBuku.getText());
+        
+        if(!match.matches()){
+            yearAlert.setText("Hanya Diisi Angka!");
+        }
+        else{
+            yearAlert.setText(null);
+        }
+    }//GEN-LAST:event_tahunTerbitBukuKeyReleased
+    
     /**
      * @param args the command line arguments
      */
@@ -355,6 +412,7 @@ public class userInterface extends javax.swing.JFrame {
     private javax.swing.JButton clearBtn;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel homeTitle;
+    private javax.swing.JLabel isbnAlert;
     private javax.swing.JTextField isbnBuku;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -366,10 +424,11 @@ public class userInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField judulBuku;
     private javax.swing.JTextField penulisBuku;
     private javax.swing.JButton submitBtn;
+    private javax.swing.JTable tabelBuku;
     private javax.swing.JTextField tahunTerbitBuku;
+    private javax.swing.JLabel yearAlert;
     // End of variables declaration//GEN-END:variables
 }
