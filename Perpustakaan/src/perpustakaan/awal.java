@@ -32,7 +32,7 @@ public class awal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         homeTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,10 +66,10 @@ public class awal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Masuk");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        loginBtn.setText("Masuk");
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                loginBtnMouseClicked(evt);
             }
         });
 
@@ -81,7 +81,7 @@ public class awal extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(homeTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 489, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(loginBtn)
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
@@ -90,7 +90,7 @@ public class awal extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(homeTitle)
-                    .addComponent(jButton1))
+                    .addComponent(loginBtn))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -130,13 +130,13 @@ public class awal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_homeTitleMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
         // TODO add your handling code here:
-        Register registerPage = new Register();
-        registerPage.show();
-
+        login gotoLogin = new login();
+        gotoLogin.show();
+        
         dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_loginBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -175,11 +175,11 @@ public class awal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel homeTitle;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton loginBtn;
     // End of variables declaration//GEN-END:variables
 }

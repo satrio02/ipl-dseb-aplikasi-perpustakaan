@@ -4,6 +4,9 @@
  */
 package perpustakaan;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.util.regex.*;
 
@@ -12,6 +15,9 @@ import java.util.regex.*;
  * @author Fikri
  */
 public class Register extends javax.swing.JFrame {
+    Connection con;
+    Statement st;
+    ResultSet rs;
 
     /**
      * Creates new form Register
@@ -41,9 +47,9 @@ public class Register extends javax.swing.JFrame {
         notelp = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        submitBtn = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
         PWlab = new javax.swing.JLabel();
         NDlab = new javax.swing.JLabel();
         NBlab = new javax.swing.JLabel();
@@ -138,32 +144,32 @@ public class Register extends javax.swing.JFrame {
         });
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 302, 330, 30));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submitBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, 30));
+        getContentPane().add(submitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, 30));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        clearBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                clearBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 352, -1, 30));
+        getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 352, -1, 30));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Login");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        loginBtn.setText("Login");
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                loginBtnMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, -1, 30));
+        getContentPane().add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, -1, 30));
 
         PWlab.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         PWlab.setForeground(new java.awt.Color(255, 0, 0));
@@ -201,49 +207,48 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-        String NamaDepan=namadepan.getText().toString();
-        String NamaBelakang=namabelakang.getText().toString();
-        String NoTelp=notelp.getText().toString();
-        String Email=email.getText().toString();
-        String Password=password.getText().toString();
-        if(NamaDepan.equals("")){
-            JOptionPane.showMessageDialog(null, "Nama Depan Wajib Diisi");
-        }
-        if(NamaBelakang.equals("")){
-            JOptionPane.showMessageDialog(null, "Nama Belakang Wajib Diisi");
-        }
-        if(NoTelp.equals("")){
-            JOptionPane.showMessageDialog(null, "Nomor Telpon Wajib Diisi");
-        }
-        if(Email.equals("")){
-            JOptionPane.showMessageDialog(null, "Email Wajib Diisi");
-        }
-        if(Password.equals("")){
-            JOptionPane.showMessageDialog(null, "Password Wajib Diisi");
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Registrasi Berhasil");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try{
+            int pesan = JOptionPane.showOptionDialog(this, "Anda yakin dengan data yang dimasukan?","Registration Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, null,null,null);
+            if (pesan == JOptionPane.YES_OPTION){
+                con = Config.configDB();
+                String sql = "INSERT INTO registration (Nama_Depan, Nama_Belakang, No_Telepon, Email, Password) VALUES('"+namadepan.getText()+"','"+namabelakang.getText()+"','"+notelp.getText()+"','"+email.getText()+"','"+password.getText()+"')";
+                st = con.createStatement();
+                st.execute(sql);
+                this.dispose();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                JOptionPane.showMessageDialog(null, "Congrats, your registration has been succsesfull!");
+                namadepan.setText("");
+                namabelakang.setText("");
+                notelp.setText("");
+                email.setText("");
+                password.setText("");
+                
+                new login().setVisible(true);
+                dispose();
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         // TODO add your handling code here:
         namadepan.setText(null);
         namabelakang.setText(null);
         notelp.setText(null);
         email.setText(null);
         password.setText(null);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_clearBtnActionPerformed
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
         // TODO add your handling code here:
         login loginPage = new login();
         loginPage.show();
         
         dispose();
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_loginBtnMouseClicked
 
     private void namadepanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namadepanKeyReleased
         // TODO add your handling code here:
@@ -357,10 +362,8 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel NDlab;
     private javax.swing.JLabel NTlab;
     private javax.swing.JLabel PWlab;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JTextField email;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -369,9 +372,11 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton loginBtn;
     private javax.swing.JTextField namabelakang;
     private javax.swing.JTextField namadepan;
     private javax.swing.JTextField notelp;
     private javax.swing.JPasswordField password;
+    private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
 }

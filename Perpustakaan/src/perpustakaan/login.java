@@ -4,6 +4,10 @@
  */
 package perpustakaan;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,6 +15,8 @@ import javax.swing.JOptionPane;
  * @author maabdl
  */
 public class login extends javax.swing.JFrame {
+    Connection con;
+    Statement st;
 
     /**
      * Creates new form login
@@ -39,6 +45,7 @@ public class login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(903, 565));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -81,18 +88,31 @@ public class login extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, -1, 30));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 90));
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 840, 350));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 903, 90));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 903, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        homePage HomePage = new homePage();
-        HomePage.show();
-        
-        dispose();
+        try{
+            String password = new String(pass.getPassword());
+            con = Config.configDB();
+            String sql = "SELECT * FROM registration WHERE Email='"+email.getText()+"' And Password='"+password+"'";
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()){
+                if(email.getText().equals(rs.getString("Email")) && password.equals(rs.getString("Password"))){
+                new homePageUser().setVisible(true);
+                dispose();
+                }
+            }else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Username or Password!");
+                }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
